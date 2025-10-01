@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Your Sofia Feature!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #E8E4F3 0%, #F0EDFF 100%);
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .logo-container {
+            display: none;
+        }
+
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        .left-content {
+            flex: 1;
+            padding: 40px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-top: 60px;
+        }
+
+        .logo {
+            width: 180px;
+            height: 70px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #8B5FBF;
+        }
+
+        .left-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #8B5FBF;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        .left-content p {
+            font-size: 1.2rem;
+            color: #4A5568;
+            line-height: 1.6;
+            max-width: 500px;
+        }
+
+        .right-content {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 40px;
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(139, 95, 191, 0.1);
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #8B5FBF;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #4A5568;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        input[type="number"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #A0AEC0;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #8B5FBF;
+            box-shadow: 0 0 0 3px rgba(139, 95, 191, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .single-select {
+            position: relative;
+            width: 100%;
+        }
+
+        .single-select-button {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: inherit;
+            color: #4A5568;
+        }
+
+        .single-select-button:hover,
+        .single-select-button.active {
+            border-color: #8B5FBF;
+            box-shadow: 0 0 0 3px rgba(139, 95, 191, 0.1);
+        }
+
+        .single-select-button::after {
+            content: '⌄';
+            font-size: 16px;
+            color: #8B5FBF;
+            transition: transform 0.3s ease;
+            font-weight: bold;
+        }
+
+        .single-select-button.active::after {
+            transform: rotate(180deg);
+        }
+
+        .single-select-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            z-index: 1000;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .single-select-dropdown.show {
+            display: block;
+        }
+
+        .single-select-option {
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            border-bottom: 1px solid #F7FAFC;
+            display: flex;
+            align-items: center;
+        }
+
+        .single-select-option:last-child {
+            border-bottom: none;
+        }
+
+        .single-select-option:hover {
+            background-color: #F7FAFC;
+        }
+
+        .single-select-option.selected {
+            background-color: rgba(139, 95, 191, 0.1);
+            color: #8B5FBF;
+        }
+
+        .single-select-option input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+            accent-color: #8B5FBF;
+        }
+
+        .placeholder-text {
+            color: #A0AEC0;
+        }
+
+        .number-select {
+            position: relative;
+            width: 100%;
+        }
+
+        .number-select select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            background: white;
+            color: #4A5568;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+        }
+
+        .number-select select:focus {
+            outline: none;
+            border-color: #8B5FBF;
+            box-shadow: 0 0 0 3px rgba(139, 95, 191, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #8B5FBF;
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: #7C3AED;
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #718096;
+            font-size: 14px;
+        }
+
+        /* Success/Error Messages */
+        .success-message,
+        .error-message {
+            display: none;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .success-message {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            color: #DC2626;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .left-content {
+                padding: 40px;
+                text-align: center;
+            }
+            
+            .left-content h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-container {
+                padding: 30px 20px;
+            }
+            
+            .logo {
+                width: 150px;
+                height: 60px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .right-content {
+                padding: 20px;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+                max-width: 100%;
+            }
+            
+            .left-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo Container -->
+    <div class="logo-container" style="display: none;">
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Left Content -->
+        <div class="left-content">
+            <div class="logo">
+                <!-- Replace this div with your logo image -->
+                <img src="https://swim.sofiapulse.com/assets/logo-BWhfv7lF.svg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span style="display: none;">Your Logo Here</span>
+            </div>
+            <h1 style="margin-top: 60px;">kick-start<br>your journey<br>here.</h1>
+            <p>This page offers a quick and easy way to request a mockup. Once submitted, our team will work their magic and provide you with a unified link to review multiple ad creative options.</p>
+        </div>
+
+        <!-- Right Content - Form -->
+        <div class="right-content">
+            <div class="form-container">
+                <h2 class="form-title">Request Your Sofia Feature!</h2>
+                
+                <div class="success-message" id="successMessage">
+                    🎉 Your feature request has been submitted successfully! Our team will get back to you soon.
+                </div>
+                
+                <div class="error-message" id="errorMessage">
+                    ❌ There was an error submitting your request. Please try again.
+                </div>
+
+                <form id="sofiaForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="campaign">Campaign</label>
+                            <input type="text" id="campaign" name="campaign" required placeholder="Enter campaign name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mainUrl">Main URL</label>
+                            <input type="url" id="mainUrl" name="mainUrl" required placeholder="Enter your URL">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="briefInfo">Brief Information</label>
+                        <textarea id="briefInfo" name="briefInfo" required placeholder="Provide some information"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select channel</label>
+                        <div class="single-select" data-name="channel">
+                            <button type="button" class="single-select-button">
+                                <span class="placeholder-text">Select channel</span>
+                            </button>
+                            <div class="single-select-dropdown">
+                                <div class="single-select-option" data-value="display">
+                                    <input type="radio" id="channel-display" name="channels" value="display">
+                                    <label for="channel-display">Display</label>
+                                </div>
+                                <div class="single-select-option" data-value="olv">
+                                    <input type="radio" id="channel-olv" name="channels" value="olv">
+                                    <label for="channel-olv">OLV</label>
+                                </div>
+                                <div class="single-select-option" data-value="ctv">
+                                    <input type="radio" id="channel-ctv" name="channels" value="ctv">
+                                    <label for="channel-ctv">CTV</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select size</label>
+                        <div class="single-select" data-name="size">
+                            <button type="button" class="single-select-button">
+                                <span class="placeholder-text">Select size</span>
+                            </button>
+                            <div class="single-select-dropdown">
+                                <div class="single-select-option" data-value="1024x1024">
+                                    <input type="radio" id="size-1024x1024" name="sizes" value="1024x1024">
+                                    <label for="size-1024x1024">1024x1024</label>
+                                </div>
+                                <div class="single-select-option" data-value="1792x1024">
+                                    <input type="radio" id="size-1792x1024" name="sizes" value="1792x1024">
+                                    <label for="size-1792x1024">1792x1024</label>
+                                </div>
+                                <div class="single-select-option" data-value="1024x1792">
+                                    <input type="radio" id="size-1024x1792" name="sizes" value="1024x1792">
+                                    <label for="size-1024x1792">1024x1792</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select type</label>
+                        <div class="single-select" data-name="type">
+                            <button type="button" class="single-select-button">
+                                <span class="placeholder-text">Select type</span>
+                            </button>
+                            <div class="single-select-dropdown">
+                                <div class="single-select-option" data-value="showrooms">
+                                    <input type="radio" id="type-showrooms" name="types" value="showrooms">
+                                    <label for="type-showrooms">Showrooms</label>
+                                </div>
+                                <div class="single-select-option" data-value="stories">
+                                    <input type="radio" id="type-stories" name="types" value="stories">
+                                    <label for="type-stories">Stories</label>
+                                </div>
+                                <div class="single-select-option" data-value="video">
+                                    <input type="radio" id="type-video" name="types" value="video">
+                                    <label for="type-video">Video</label>
+                                </div>
+                                <div class="single-select-option" data-value="chatbot">
+                                    <input type="radio" id="type-chatbot" name="types" value="chatbot">
+                                    <label for="type-chatbot">Chatbot</label>
+                                </div>
+                                <div class="single-select-option" data-value="survey">
+                                    <input type="radio" id="type-survey" name="types" value="survey">
+                                    <label for="type-survey">Survey</label>
+                                </div>
+                                <div class="single-select-option" data-value="quiz">
+                                    <input type="radio" id="type-quiz" name="types" value="quiz">
+                                    <label for="type-quiz">Quiz</label>
+                                </div>
+                                <div class="single-select-option" data-value="poll">
+                                    <input type="radio" id="type-poll" name="types" value="poll">
+                                    <label for="type-poll">Poll</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="campaignPeriod">Campaign Live Period</label>
+                            <input type="date" id="campaignPeriod" name="campaignPeriod">
+                        </div>
+                        <div class="form-group">
+                            <label for="estimatedVolume">Estimated Volume of Impressions</label>
+                            <div class="number-select">
+                                <input type="text" id="estimatedVolume" name="estimatedVolume" 
+                                    required placeholder="Enter volume">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        © 2025 SofiaPulse. All Rights Reserved.
+    </div>
+
+    <script>
+        // Single-select dropdown functionality
+        document.querySelectorAll('.single-select').forEach(singleSelect => {
+            const button = singleSelect.querySelector('.single-select-button');
+            const dropdown = singleSelect.querySelector('.single-select-dropdown');
+            const options = singleSelect.querySelectorAll('.single-select-option');
+            const buttonText = button.querySelector('span');
+            const name = singleSelect.getAttribute('data-name');
+            
+            // Toggle dropdown
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                // Close other dropdowns
+                document.querySelectorAll('.single-select-dropdown').forEach(dd => {
+                    if (dd !== dropdown) {
+                        dd.classList.remove('show');
+                        dd.parentElement.querySelector('.single-select-button').classList.remove('active');
+                    }
+                });
+                
+                dropdown.classList.toggle('show');
+                button.classList.toggle('active');
+            });
+            
+            // Handle option selection
+            options.forEach(option => {
+                const radio = option.querySelector('input[type="radio"]');
+                
+                option.addEventListener('click', (e) => {
+                    if (e.target.type !== 'radio') {
+                        e.preventDefault();
+                        radio.checked = true;
+                    }
+                    
+                    // Remove selected state from all options
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected state to current option
+                    option.classList.add('selected');
+                    
+                    // Update button text
+                    const selectedLabel = option.querySelector('label').textContent;
+                    buttonText.textContent = selectedLabel;
+                    buttonText.className = '';
+                    
+                    // Close dropdown
+                    dropdown.classList.remove('show');
+                    button.classList.remove('active');
+                });
+            });
+        });
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.single-select-dropdown').forEach(dropdown => {
+                dropdown.classList.remove('show');
+                dropdown.parentElement.querySelector('.single-select-button').classList.remove('active');
+            });
+        });
+
+        // Form submission
+        document.getElementById('sofiaForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Hide previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Show loading state
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            // Collect form data
+            const formData = new FormData(this);
+            
+            // Get single selections
+            const selectedChannel = document.querySelector('input[name="channels"]:checked')?.value || '';
+            const selectedSize = document.querySelector('input[name="sizes"]:checked')?.value || '';
+            const selectedType = document.querySelector('input[name="types"]:checked')?.value || '';
+            
+            // Create data object
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                campaign: formData.get('campaign'),
+                mainUrl: formData.get('mainUrl'),
+                briefInfo: formData.get('briefInfo'),
+                channel: selectedChannel,
+                size: selectedSize,
+                type: selectedType,
+                campaignPeriod: formData.get('campaignPeriod'),
+                estimatedVolume: formData.get('estimatedVolume')
+            };
+            
+            try {
+                const response = await fetch('https://jokra.app.n8n.cloud/webhook/e5e222f8-d20f-458d-8d30-d3540199b22e', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    successMessage.style.display = 'block';
+                    this.reset();
+                    
+                    // Reset dropdown button texts
+                    document.querySelectorAll('.single-select').forEach(ss => {
+                        const buttonText = ss.querySelector('.single-select-button span');
+                        const name = ss.getAttribute('data-name');
+                        buttonText.textContent = `Select ${name}`;
+                        buttonText.className = 'placeholder-text';
+                        
+                        // Uncheck all radio buttons and remove selected class
+                        ss.querySelectorAll('.single-select-option').forEach(opt => {
+                            opt.querySelector('input[type="radio"]').checked = false;
+                            opt.classList.remove('selected');
+                        });
+                    });
+                    
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.style.display = 'block';
+                errorMessage.scrollIntoView({ behavior: 'smooth' });
+            } finally {
+                // Reset button state
+                submitBtn.textContent = 'Submit';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
