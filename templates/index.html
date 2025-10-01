@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -326,12 +327,12 @@
             .main-container {
                 flex-direction: column;
             }
-            
+
             .left-content {
                 padding: 40px;
                 text-align: center;
             }
-            
+
             .left-content h1 {
                 font-size: 3rem;
             }
@@ -341,31 +342,32 @@
             .logo-container {
                 padding: 30px 20px;
             }
-            
+
             .logo {
                 width: 150px;
                 height: 60px;
             }
-            
+
             .form-row {
                 grid-template-columns: 1fr;
             }
-            
+
             .right-content {
                 padding: 20px;
             }
-            
+
             .form-container {
                 padding: 30px 20px;
                 max-width: 100%;
             }
-            
+
             .left-content h1 {
                 font-size: 2.5rem;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Logo Container -->
     <div class="logo-container" style="display: none;">
@@ -377,22 +379,25 @@
         <div class="left-content">
             <div class="logo">
                 <!-- Replace this div with your logo image -->
-                <img src="https://swim.sofiapulse.com/assets/logo-BWhfv7lF.svg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <img src="https://swim.sofiapulse.com/assets/logo-BWhfv7lF.svg" alt="Logo"
+                    style="max-width: 100%; max-height: 100%; object-fit: contain;"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <span style="display: none;">Your Logo Here</span>
             </div>
             <h1 style="margin-top: 60px;">kick-start<br>your journey<br>here.</h1>
-            <p>This page offers a quick and easy way to request a mockup. Once submitted, our team will work their magic and provide you with a unified link to review multiple ad creative options.</p>
+            <p>This page offers a quick and easy way to request a mockup. Once submitted, our team will work their magic
+                and provide you with a unified link to review multiple ad creative options.</p>
         </div>
 
         <!-- Right Content - Form -->
         <div class="right-content">
             <div class="form-container">
                 <h2 class="form-title">Request Your Sofia Feature!</h2>
-                
+
                 <div class="success-message" id="successMessage">
                     🎉 Your feature request has been submitted successfully! Our team will get back to you soon.
                 </div>
-                
+
                 <div class="error-message" id="errorMessage">
                     ❌ There was an error submitting your request. Please try again.
                 </div>
@@ -403,7 +408,7 @@
                             <label for="name">Name</label>
                             <input type="text" id="name" name="name" required placeholder="Enter your name">
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" required placeholder="Enter your email">
@@ -415,7 +420,7 @@
                             <label for="campaign">Campaign</label>
                             <input type="text" id="campaign" name="campaign" required placeholder="Enter campaign name">
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="mainUrl">Main URL</label>
                             <input type="url" id="mainUrl" name="mainUrl" required placeholder="Enter your URL">
@@ -424,7 +429,8 @@
 
                     <div class="form-group">
                         <label for="briefInfo">Brief Information</label>
-                        <textarea id="briefInfo" name="briefInfo" required placeholder="Provide some information"></textarea>
+                        <textarea id="briefInfo" name="briefInfo" required
+                            placeholder="Provide some information"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -520,8 +526,8 @@
                         <div class="form-group">
                             <label for="estimatedVolume">Estimated Volume of Impressions</label>
                             <div class="number-select">
-                                <input type="text" id="estimatedVolume" name="estimatedVolume" 
-                                    required placeholder="Enter volume">
+                                <input type="text" id="estimatedVolume" name="estimatedVolume" required
+                                    placeholder="Enter volume">
                             </div>
                         </div>
                     </div>
@@ -545,11 +551,11 @@
             const options = singleSelect.querySelectorAll('.single-select-option');
             const buttonText = button.querySelector('span');
             const name = singleSelect.getAttribute('data-name');
-            
+
             // Toggle dropdown
             button.addEventListener('click', (e) => {
                 e.stopPropagation();
-                
+
                 // Close other dropdowns
                 document.querySelectorAll('.single-select-dropdown').forEach(dd => {
                     if (dd !== dropdown) {
@@ -557,39 +563,39 @@
                         dd.parentElement.querySelector('.single-select-button').classList.remove('active');
                     }
                 });
-                
+
                 dropdown.classList.toggle('show');
                 button.classList.toggle('active');
             });
-            
+
             // Handle option selection
             options.forEach(option => {
                 const radio = option.querySelector('input[type="radio"]');
-                
+
                 option.addEventListener('click', (e) => {
                     if (e.target.type !== 'radio') {
                         e.preventDefault();
                         radio.checked = true;
                     }
-                    
+
                     // Remove selected state from all options
                     options.forEach(opt => opt.classList.remove('selected'));
-                    
+
                     // Add selected state to current option
                     option.classList.add('selected');
-                    
+
                     // Update button text
                     const selectedLabel = option.querySelector('label').textContent;
                     buttonText.textContent = selectedLabel;
                     buttonText.className = '';
-                    
+
                     // Close dropdown
                     dropdown.classList.remove('show');
                     button.classList.remove('active');
                 });
             });
         });
-        
+
         // Close dropdowns when clicking outside
         document.addEventListener('click', () => {
             document.querySelectorAll('.single-select-dropdown').forEach(dropdown => {
@@ -599,29 +605,29 @@
         });
 
         // Form submission
-        document.getElementById('sofiaForm').addEventListener('submit', async function(e) {
+        document.getElementById('sofiaForm').addEventListener('submit', async function (e) {
             e.preventDefault();
-            
+
             const submitBtn = document.querySelector('.submit-btn');
             const successMessage = document.getElementById('successMessage');
             const errorMessage = document.getElementById('errorMessage');
-            
+
             // Hide previous messages
             successMessage.style.display = 'none';
             errorMessage.style.display = 'none';
-            
+
             // Show loading state
             submitBtn.textContent = 'Submitting...';
             submitBtn.disabled = true;
-            
+
             // Collect form data
             const formData = new FormData(this);
-            
+
             // Get single selections
             const selectedChannel = document.querySelector('input[name="channels"]:checked')?.value || '';
             const selectedSize = document.querySelector('input[name="sizes"]:checked')?.value || '';
             const selectedType = document.querySelector('input[name="types"]:checked')?.value || '';
-            
+
             // Create data object
             const data = {
                 name: formData.get('name'),
@@ -635,7 +641,7 @@
                 campaignPeriod: formData.get('campaignPeriod'),
                 estimatedVolume: formData.get('estimatedVolume')
             };
-            
+
             try {
                 const response = await fetch('https://jokra.app.n8n.cloud/webhook/e5e222f8-d20f-458d-8d30-d3540199b22e', {
                     method: 'POST',
@@ -644,31 +650,31 @@
                     },
                     body: JSON.stringify(data)
                 });
-                
+
                 if (response.ok) {
                     successMessage.style.display = 'block';
                     this.reset();
-                    
+
                     // Reset dropdown button texts
                     document.querySelectorAll('.single-select').forEach(ss => {
                         const buttonText = ss.querySelector('.single-select-button span');
                         const name = ss.getAttribute('data-name');
                         buttonText.textContent = `Select ${name}`;
                         buttonText.className = 'placeholder-text';
-                        
+
                         // Uncheck all radio buttons and remove selected class
                         ss.querySelectorAll('.single-select-option').forEach(opt => {
                             opt.querySelector('input[type="radio"]').checked = false;
                             opt.classList.remove('selected');
                         });
                     });
-                    
+
                     // Scroll to success message
                     successMessage.scrollIntoView({ behavior: 'smooth' });
                 } else {
                     throw new Error('Network response was not ok');
                 }
-                
+
             } catch (error) {
                 console.error('Error:', error);
                 errorMessage.style.display = 'block';
@@ -680,5 +686,21 @@
             }
         });
     </script>
+    <script>
+        document.getElementById('sofiaForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const response = await fetch("/submit", {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await response.json();
+            console.log(result.message);
+        });
+    </script>
+
 </body>
+
 </html>
