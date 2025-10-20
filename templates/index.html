@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -149,47 +148,68 @@
             min-height: 100px;
         }
 
-        .single-select {
+        /* Multi-select styles */
+        .multi-select {
             position: relative;
             width: 100%;
         }
 
-        .single-select-button {
+        .multi-select-container {
             width: 100%;
-            padding: 15px;
+            min-height: 50px;
+            padding: 10px;
             border: 1px solid #E2E8F0;
             border-radius: 8px;
-            font-size: 16px;
             background: white;
-            text-align: left;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: inherit;
-            color: #4A5568;
         }
 
-        .single-select-button:hover,
-        .single-select-button.active {
+        .multi-select-container:hover,
+        .multi-select-container.active {
             border-color: #8B5FBF;
             box-shadow: 0 0 0 3px rgba(139, 95, 191, 0.1);
         }
 
-        .single-select-button::after {
-            content: '⌄';
-            font-size: 16px;
+        .selected-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            min-height: 30px;
+            align-items: center;
+        }
+
+        .selected-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(139, 95, 191, 0.1);
             color: #8B5FBF;
-            transition: transform 0.3s ease;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .selected-item .remove-btn {
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            color: #8B5FBF;
             font-weight: bold;
+            transition: color 0.2s ease;
         }
 
-        .single-select-button.active::after {
-            transform: rotate(180deg);
+        .selected-item .remove-btn:hover {
+            color: #7C3AED;
         }
 
-        .single-select-dropdown {
+        .placeholder-text {
+            color: #A0AEC0;
+            font-size: 16px;
+        }
+
+        .multi-select-dropdown {
             position: absolute;
             top: 100%;
             left: 0;
@@ -199,17 +219,18 @@
             border-top: none;
             border-radius: 0 0 8px 8px;
             z-index: 1000;
-            max-height: 200px;
+            max-height: 250px;
             overflow-y: auto;
             display: none;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 2px;
         }
 
-        .single-select-dropdown.show {
+        .multi-select-dropdown.show {
             display: block;
         }
 
-        .single-select-option {
+        .multi-select-option {
             padding: 12px 15px;
             cursor: pointer;
             transition: background-color 0.2s ease;
@@ -218,56 +239,36 @@
             align-items: center;
         }
 
-        .single-select-option:last-child {
+        .multi-select-option:last-child {
             border-bottom: none;
         }
 
-        .single-select-option:hover {
+        .multi-select-option:hover {
             background-color: #F7FAFC;
         }
 
-        .single-select-option.selected {
+        .multi-select-option.selected {
             background-color: rgba(139, 95, 191, 0.1);
             color: #8B5FBF;
         }
 
-        .single-select-option input[type="radio"] {
-            width: 16px;
-            height: 16px;
+        .multi-select-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
             margin-right: 10px;
             accent-color: #8B5FBF;
+            cursor: pointer;
         }
 
-        .placeholder-text {
-            color: #A0AEC0;
+        .multi-select-option label {
+            margin: 0;
+            cursor: pointer;
+            flex: 1;
         }
 
         .number-select {
             position: relative;
             width: 100%;
-        }
-
-        .number-select select {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #E2E8F0;
-            border-radius: 8px;
-            font-size: 16px;
-            font-family: inherit;
-            background: white;
-            color: #4A5568;
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 12px center;
-            background-repeat: no-repeat;
-            background-size: 16px;
-        }
-
-        .number-select select:focus {
-            outline: none;
-            border-color: #8B5FBF;
-            box-shadow: 0 0 0 3px rgba(139, 95, 191, 0.1);
         }
 
         .submit-btn {
@@ -300,7 +301,6 @@
             font-size: 14px;
         }
 
-        /* Success/Error Messages */
         .success-message,
         .error-message {
             display: none;
@@ -327,12 +327,12 @@
             .main-container {
                 flex-direction: column;
             }
-
+            
             .left-content {
                 padding: 40px;
                 text-align: center;
             }
-
+            
             .left-content h1 {
                 font-size: 3rem;
             }
@@ -342,62 +342,50 @@
             .logo-container {
                 padding: 30px 20px;
             }
-
+            
             .logo {
                 width: 150px;
                 height: 60px;
             }
-
+            
             .form-row {
                 grid-template-columns: 1fr;
             }
-
+            
             .right-content {
                 padding: 20px;
             }
-
+            
             .form-container {
                 padding: 30px 20px;
                 max-width: 100%;
             }
-
+            
             .left-content h1 {
                 font-size: 2.5rem;
             }
         }
     </style>
 </head>
-
 <body>
-    <!-- Logo Container -->
-    <div class="logo-container" style="display: none;">
-    </div>
-
-    <!-- Main Content -->
     <div class="main-container">
-        <!-- Left Content -->
         <div class="left-content">
             <div class="logo">
-                <!-- Replace this div with your logo image -->
-                <img src="https://swim.sofiapulse.com/assets/logo-BWhfv7lF.svg" alt="Logo"
-                    style="max-width: 100%; max-height: 100%; object-fit: contain;"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <img src="https://swim.sofiapulse.com/assets/logo-BWhfv7lF.svg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <span style="display: none;">Your Logo Here</span>
             </div>
             <h1 style="margin-top: 60px;">kick-start<br>your journey<br>here.</h1>
-            <p>This page offers a quick and easy way to request a mockup. Once submitted, our team will work their magic
-                and provide you with a unified link to review multiple ad creative options.</p>
+            <p>This page offers a quick and easy way to request a mockup. Once submitted, our team will work their magic and provide you with a unified link to review multiple ad creative options.</p>
         </div>
 
-        <!-- Right Content - Form -->
         <div class="right-content">
             <div class="form-container">
                 <h2 class="form-title">Request Your Sofia Feature!</h2>
-
+                
                 <div class="success-message" id="successMessage">
                     🎉 Your feature request has been submitted successfully! Our team will get back to you soon.
                 </div>
-
+                
                 <div class="error-message" id="errorMessage">
                     ❌ There was an error submitting your request. Please try again.
                 </div>
@@ -408,7 +396,7 @@
                             <label for="name">Name</label>
                             <input type="text" id="name" name="name" required placeholder="Enter your name">
                         </div>
-
+                        
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" required placeholder="Enter your email">
@@ -420,7 +408,7 @@
                             <label for="campaign">Campaign</label>
                             <input type="text" id="campaign" name="campaign" required placeholder="Enter campaign name">
                         </div>
-
+                        
                         <div class="form-group">
                             <label for="mainUrl">Main URL</label>
                             <input type="url" id="mainUrl" name="mainUrl" required placeholder="Enter your URL">
@@ -429,27 +417,28 @@
 
                     <div class="form-group">
                         <label for="briefInfo">Brief Information</label>
-                        <textarea id="briefInfo" name="briefInfo" required
-                            placeholder="Provide some information"></textarea>
+                        <textarea id="briefInfo" name="briefInfo" required placeholder="Provide some information"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label>Select channel</label>
-                        <div class="single-select" data-name="channel">
-                            <button type="button" class="single-select-button">
-                                <span class="placeholder-text">Select channel</span>
-                            </button>
-                            <div class="single-select-dropdown">
-                                <div class="single-select-option" data-value="display">
-                                    <input type="radio" id="channel-display" name="channels" value="display">
+                        <label>Select channels (multiple)</label>
+                        <div class="multi-select" data-name="channels">
+                            <div class="multi-select-container">
+                                <div class="selected-items">
+                                    <span class="placeholder-text">Select channels</span>
+                                </div>
+                            </div>
+                            <div class="multi-select-dropdown">
+                                <div class="multi-select-option" data-value="display">
+                                    <input type="checkbox" id="channel-display" value="display">
                                     <label for="channel-display">Display</label>
                                 </div>
-                                <div class="single-select-option" data-value="olv">
-                                    <input type="radio" id="channel-olv" name="channels" value="olv">
+                                <div class="multi-select-option" data-value="olv">
+                                    <input type="checkbox" id="channel-olv" value="olv">
                                     <label for="channel-olv">OLV</label>
                                 </div>
-                                <div class="single-select-option" data-value="ctv">
-                                    <input type="radio" id="channel-ctv" name="channels" value="ctv">
+                                <div class="multi-select-option" data-value="ctv">
+                                    <input type="checkbox" id="channel-ctv" value="ctv">
                                     <label for="channel-ctv">CTV</label>
                                 </div>
                             </div>
@@ -457,61 +446,85 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Select size</label>
-                        <div class="single-select" data-name="size">
-                            <button type="button" class="single-select-button">
-                                <span class="placeholder-text">Select size</span>
-                            </button>
-                            <div class="single-select-dropdown">
-                                <div class="single-select-option" data-value="1024x1024">
-                                    <input type="radio" id="size-1024x1024" name="sizes" value="1024x1024">
-                                    <label for="size-1024x1024">1024x1024</label>
+                        <label>Select sizes (multiple)</label>
+                        <div class="multi-select" data-name="sizes">
+                            <div class="multi-select-container">
+                                <div class="selected-items">
+                                    <span class="placeholder-text">Select sizes</span>
                                 </div>
-                                <div class="single-select-option" data-value="1792x1024">
-                                    <input type="radio" id="size-1792x1024" name="sizes" value="1792x1024">
-                                    <label for="size-1792x1024">1792x1024</label>
+                            </div>
+                            <div class="multi-select-dropdown">
+                                <div class="multi-select-option" data-value="300x600">
+                                    <input type="checkbox" id="size-300x600" value="300x600">
+                                    <label for="size-300x600">300x600</label>
                                 </div>
-                                <div class="single-select-option" data-value="1024x1792">
-                                    <input type="radio" id="size-1024x1792" name="sizes" value="1024x1792">
-                                    <label for="size-1024x1792">1024x1792</label>
+                                <div class="multi-select-option" data-value="300x250">
+                                    <input type="checkbox" id="size-300x250" value="300x250">
+                                    <label for="size-300x250">300x250</label>
+                                </div>
+                                <div class="multi-select-option" data-value="340x600">
+                                    <input type="checkbox" id="size-340x600" value="340x600">
+                                    <label for="size-340x600">340x600</label>
+                                </div>
+                                <div class="multi-select-option" data-value="970x250">
+                                    <input type="checkbox" id="size-970x250" value="970x250">
+                                    <label for="size-970x250">970x250</label>
+                                </div>
+                                <div class="multi-select-option" data-value="160x600">
+                                    <input type="checkbox" id="size-160x600" value="160x600">
+                                    <label for="size-160x600">160x600</label>
+                                </div>
+                                <div class="multi-select-option" data-value="320x480">
+                                    <input type="checkbox" id="size-320x480" value="320x480">
+                                    <label for="size-320x480">320x480</label>
+                                </div>
+                                <div class="multi-select-option" data-value="300x260">
+                                    <input type="checkbox" id="size-300x260" value="300x260">
+                                    <label for="size-300x260">300x260</label>
+                                </div>
+                                <div class="multi-select-option" data-value="300x460">
+                                    <input type="checkbox" id="size-300x460" value="300x460">
+                                    <label for="size-300x460">300x460</label>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Select type</label>
-                        <div class="single-select" data-name="type">
-                            <button type="button" class="single-select-button">
-                                <span class="placeholder-text">Select type</span>
-                            </button>
-                            <div class="single-select-dropdown">
-                                <div class="single-select-option" data-value="showrooms">
-                                    <input type="radio" id="type-showrooms" name="types" value="showrooms">
+                        <label>Select types (multiple)</label>
+                        <div class="multi-select" data-name="types">
+                            <div class="multi-select-container">
+                                <div class="selected-items">
+                                    <span class="placeholder-text">Select types</span>
+                                </div>
+                            </div>
+                            <div class="multi-select-dropdown">
+                                <div class="multi-select-option" data-value="showrooms">
+                                    <input type="checkbox" id="type-showrooms" value="showrooms">
                                     <label for="type-showrooms">Showrooms</label>
                                 </div>
-                                <div class="single-select-option" data-value="stories">
-                                    <input type="radio" id="type-stories" name="types" value="stories">
+                                <div class="multi-select-option" data-value="stories">
+                                    <input type="checkbox" id="type-stories" value="stories">
                                     <label for="type-stories">Stories</label>
                                 </div>
-                                <div class="single-select-option" data-value="video">
-                                    <input type="radio" id="type-video" name="types" value="video">
+                                <div class="multi-select-option" data-value="video">
+                                    <input type="checkbox" id="type-video" value="video">
                                     <label for="type-video">Video</label>
                                 </div>
-                                <div class="single-select-option" data-value="chatbot">
-                                    <input type="radio" id="type-chatbot" name="types" value="chatbot">
+                                <div class="multi-select-option" data-value="chatbot">
+                                    <input type="checkbox" id="type-chatbot" value="chatbot">
                                     <label for="type-chatbot">Chatbot</label>
                                 </div>
-                                <div class="single-select-option" data-value="survey">
-                                    <input type="radio" id="type-survey" name="types" value="survey">
+                                <div class="multi-select-option" data-value="survey">
+                                    <input type="checkbox" id="type-survey" value="survey">
                                     <label for="type-survey">Survey</label>
                                 </div>
-                                <div class="single-select-option" data-value="quiz">
-                                    <input type="radio" id="type-quiz" name="types" value="quiz">
+                                <div class="multi-select-option" data-value="quiz">
+                                    <input type="checkbox" id="type-quiz" value="quiz">
                                     <label for="type-quiz">Quiz</label>
                                 </div>
-                                <div class="single-select-option" data-value="poll">
-                                    <input type="radio" id="type-poll" name="types" value="poll">
+                                <div class="multi-select-option" data-value="poll">
+                                    <input type="checkbox" id="type-poll" value="poll">
                                     <label for="type-poll">Poll</label>
                                 </div>
                             </div>
@@ -525,10 +538,8 @@
                         </div>
                         <div class="form-group">
                             <label for="estimatedVolume">Estimated Volume of Impressions</label>
-                            <div class="number-select">
-                                <input type="text" id="estimatedVolume" name="estimatedVolume" required
-                                    placeholder="Enter volume">
-                            </div>
+                            <input type="text" id="estimatedVolume" name="estimatedVolume" 
+                                required placeholder="Enter volume">
                         </div>
                     </div>
 
@@ -538,96 +549,172 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <div class="footer">
         © 2025 SofiaPulse. All Rights Reserved.
     </div>
 
     <script>
-        // Single-select dropdown functionality
-        document.querySelectorAll('.single-select').forEach(singleSelect => {
-            const button = singleSelect.querySelector('.single-select-button');
-            const dropdown = singleSelect.querySelector('.single-select-dropdown');
-            const options = singleSelect.querySelectorAll('.single-select-option');
-            const buttonText = button.querySelector('span');
-            const name = singleSelect.getAttribute('data-name');
-
-            // Toggle dropdown
-            button.addEventListener('click', (e) => {
-                e.stopPropagation();
-
+        // Multi-select functionality
+        class MultiSelect {
+            constructor(element) {
+                this.element = element;
+                this.container = element.querySelector('.multi-select-container');
+                this.dropdown = element.querySelector('.multi-select-dropdown');
+                this.selectedItemsContainer = element.querySelector('.selected-items');
+                this.options = element.querySelectorAll('.multi-select-option');
+                this.name = element.getAttribute('data-name');
+                this.selectedValues = new Set();
+                
+                this.init();
+            }
+            
+            init() {
+                // Toggle dropdown
+                this.container.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('remove-btn')) {
+                        return;
+                    }
+                    e.stopPropagation();
+                    this.toggleDropdown();
+                });
+                
+                // Handle option selection
+                this.options.forEach(option => {
+                    const checkbox = option.querySelector('input[type="checkbox"]');
+                    
+                    option.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent dropdown from closing
+                        
+                        if (e.target.type !== 'checkbox') {
+                            e.preventDefault();
+                            checkbox.checked = !checkbox.checked;
+                        }
+                        
+                        const value = checkbox.value;
+                        const label = option.querySelector('label').textContent;
+                        
+                        if (checkbox.checked) {
+                            this.addSelection(value, label);
+                            option.classList.add('selected');
+                        } else {
+                            this.removeSelection(value);
+                            option.classList.remove('selected');
+                        }
+                    });
+                });
+            }
+            
+            toggleDropdown() {
                 // Close other dropdowns
-                document.querySelectorAll('.single-select-dropdown').forEach(dd => {
-                    if (dd !== dropdown) {
+                document.querySelectorAll('.multi-select-dropdown').forEach(dd => {
+                    if (dd !== this.dropdown) {
                         dd.classList.remove('show');
-                        dd.parentElement.querySelector('.single-select-button').classList.remove('active');
+                        dd.parentElement.querySelector('.multi-select-container').classList.remove('active');
                     }
                 });
-
-                dropdown.classList.toggle('show');
-                button.classList.toggle('active');
-            });
-
-            // Handle option selection
-            options.forEach(option => {
-                const radio = option.querySelector('input[type="radio"]');
-
-                option.addEventListener('click', (e) => {
-                    if (e.target.type !== 'radio') {
-                        e.preventDefault();
-                        radio.checked = true;
-                    }
-
-                    // Remove selected state from all options
-                    options.forEach(opt => opt.classList.remove('selected'));
-
-                    // Add selected state to current option
-                    option.classList.add('selected');
-
-                    // Update button text
-                    const selectedLabel = option.querySelector('label').textContent;
-                    buttonText.textContent = selectedLabel;
-                    buttonText.className = '';
-
-                    // Close dropdown
-                    dropdown.classList.remove('show');
-                    button.classList.remove('active');
+                
+                this.dropdown.classList.toggle('show');
+                this.container.classList.toggle('active');
+            }
+            
+            addSelection(value, label) {
+                this.selectedValues.add(value);
+                this.updateDisplay();
+            }
+            
+            removeSelection(value) {
+                this.selectedValues.delete(value);
+                
+                // Uncheck the checkbox
+                const option = Array.from(this.options).find(opt => 
+                    opt.querySelector('input[type="checkbox"]').value === value
+                );
+                if (option) {
+                    option.querySelector('input[type="checkbox"]').checked = false;
+                    option.classList.remove('selected');
+                }
+                
+                this.updateDisplay();
+            }
+            
+            updateDisplay() {
+                this.selectedItemsContainer.innerHTML = '';
+                
+                if (this.selectedValues.size === 0) {
+                    this.selectedItemsContainer.innerHTML = `<span class="placeholder-text">Select ${this.name}</span>`;
+                } else {
+                    this.selectedValues.forEach(value => {
+                        const option = Array.from(this.options).find(opt => 
+                            opt.querySelector('input[type="checkbox"]').value === value
+                        );
+                        const label = option.querySelector('label').textContent;
+                        
+                        const item = document.createElement('div');
+                        item.className = 'selected-item';
+                        item.innerHTML = `
+                            ${label}
+                            <span class="remove-btn" data-value="${value}">×</span>
+                        `;
+                        
+                        const removeBtn = item.querySelector('.remove-btn');
+                        removeBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            this.removeSelection(value);
+                        });
+                        
+                        this.selectedItemsContainer.appendChild(item);
+                    });
+                }
+            }
+            
+            getSelectedValues() {
+                return Array.from(this.selectedValues);
+            }
+            
+            reset() {
+                this.selectedValues.clear();
+                this.options.forEach(option => {
+                    option.querySelector('input[type="checkbox"]').checked = false;
+                    option.classList.remove('selected');
                 });
-            });
+                this.updateDisplay();
+            }
+        }
+        
+        // Initialize all multi-selects
+        const multiSelects = {};
+        document.querySelectorAll('.multi-select').forEach(element => {
+            const name = element.getAttribute('data-name');
+            multiSelects[name] = new MultiSelect(element);
         });
-
+        
         // Close dropdowns when clicking outside
         document.addEventListener('click', () => {
-            document.querySelectorAll('.single-select-dropdown').forEach(dropdown => {
+            document.querySelectorAll('.multi-select-dropdown').forEach(dropdown => {
                 dropdown.classList.remove('show');
-                dropdown.parentElement.querySelector('.single-select-button').classList.remove('active');
+                dropdown.parentElement.querySelector('.multi-select-container').classList.remove('active');
             });
         });
 
         // Form submission
-        document.getElementById('sofiaForm').addEventListener('submit', async function (e) {
+        document.getElementById('sofiaForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-
+            
             const submitBtn = document.querySelector('.submit-btn');
             const successMessage = document.getElementById('successMessage');
             const errorMessage = document.getElementById('errorMessage');
-
+            
             // Hide previous messages
             successMessage.style.display = 'none';
             errorMessage.style.display = 'none';
-
+            
             // Show loading state
             submitBtn.textContent = 'Submitting...';
             submitBtn.disabled = true;
-
+            
             // Collect form data
             const formData = new FormData(this);
-
-            // Get single selections
-            const selectedChannel = document.querySelector('input[name="channels"]:checked')?.value || '';
-            const selectedSize = document.querySelector('input[name="sizes"]:checked')?.value || '';
-            const selectedType = document.querySelector('input[name="types"]:checked')?.value || '';
-
+            
             // Create data object
             const data = {
                 name: formData.get('name'),
@@ -635,13 +722,13 @@
                 campaign: formData.get('campaign'),
                 mainUrl: formData.get('mainUrl'),
                 briefInfo: formData.get('briefInfo'),
-                channel: selectedChannel,
-                size: selectedSize,
-                type: selectedType,
+                channels: multiSelects['channels'].getSelectedValues(),
+                sizes: multiSelects['sizes'].getSelectedValues(),
+                types: multiSelects['types'].getSelectedValues(),
                 campaignPeriod: formData.get('campaignPeriod'),
                 estimatedVolume: formData.get('estimatedVolume')
             };
-
+            
             try {
                 const response = await fetch('https://jokra.app.n8n.cloud/webhook/e5e222f8-d20f-458d-8d30-d3540199b22e', {
                     method: 'POST',
@@ -650,31 +737,20 @@
                     },
                     body: JSON.stringify(data)
                 });
-
+                
                 if (response.ok) {
                     successMessage.style.display = 'block';
                     this.reset();
-
-                    // Reset dropdown button texts
-                    document.querySelectorAll('.single-select').forEach(ss => {
-                        const buttonText = ss.querySelector('.single-select-button span');
-                        const name = ss.getAttribute('data-name');
-                        buttonText.textContent = `Select ${name}`;
-                        buttonText.className = 'placeholder-text';
-
-                        // Uncheck all radio buttons and remove selected class
-                        ss.querySelectorAll('.single-select-option').forEach(opt => {
-                            opt.querySelector('input[type="radio"]').checked = false;
-                            opt.classList.remove('selected');
-                        });
-                    });
-
+                    
+                    // Reset all multi-selects
+                    Object.values(multiSelects).forEach(ms => ms.reset());
+                    
                     // Scroll to success message
                     successMessage.scrollIntoView({ behavior: 'smooth' });
                 } else {
                     throw new Error('Network response was not ok');
                 }
-
+                
             } catch (error) {
                 console.error('Error:', error);
                 errorMessage.style.display = 'block';
@@ -686,21 +762,5 @@
             }
         });
     </script>
-    <script>
-        document.getElementById('sofiaForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            const formData = new FormData(this);
-            const response = await fetch("/submit", {
-                method: "POST",
-                body: formData
-            });
-
-            const result = await response.json();
-            console.log(result.message);
-        });
-    </script>
-
 </body>
-
 </html>
