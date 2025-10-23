@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -120,6 +121,7 @@
         input[type="url"],
         input[type="number"],
         input[type="date"],
+        select,
         textarea {
             width: 100%;
             padding: 15px;
@@ -137,6 +139,7 @@
         }
 
         input:focus,
+        select:focus,
         textarea:focus {
             outline: none;
             border-color: #8B5FBF;
@@ -327,12 +330,12 @@
             .main-container {
                 flex-direction: column;
             }
-            
+
             .left-content {
                 padding: 40px;
                 text-align: center;
             }
-            
+
             .left-content h1 {
                 font-size: 3rem;
             }
@@ -342,50 +345,54 @@
             .logo-container {
                 padding: 30px 20px;
             }
-            
+
             .logo {
                 width: 150px;
                 height: 60px;
             }
-            
+
             .form-row {
                 grid-template-columns: 1fr;
             }
-            
+
             .right-content {
                 padding: 20px;
             }
-            
+
             .form-container {
                 padding: 30px 20px;
                 max-width: 100%;
             }
-            
+
             .left-content h1 {
                 font-size: 2.5rem;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="main-container">
         <div class="left-content">
             <div class="logo">
-                <img src="https://swim.sofiapulse.com/assets/logo-BWhfv7lF.svg" alt="Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <img src="https://swim.sofiapulse.com/assets/logo-BWhfv7lF.svg" alt="Logo"
+                    style="max-width: 100%; max-height: 100%; object-fit: contain;"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <span style="display: none;">Your Logo Here</span>
             </div>
             <h1 style="margin-top: 60px;">kick-start<br>your journey<br>here.</h1>
-            <p>This page offers a quick and easy way to request a mockup. Once submitted, our team will work their magic and provide you with a unified link to review multiple ad creative options.</p>
+            <p>This page offers a quick and easy way to request a mockup. Once submitted, our team will work their magic
+                and provide you with a unified link to review multiple ad creative options.</p>
         </div>
 
         <div class="right-content">
             <div class="form-container">
                 <h2 class="form-title">Request Your Sofia Feature!</h2>
-                
+
                 <div class="success-message" id="successMessage">
                     🎉 Your feature request has been submitted successfully! Our team will get back to you soon.
                 </div>
-                
+
                 <div class="error-message" id="errorMessage">
                     ❌ There was an error submitting your request. Please try again.
                 </div>
@@ -396,10 +403,92 @@
                             <label for="name">Name</label>
                             <input type="text" id="name" name="name" required placeholder="Enter your name">
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" required placeholder="Enter your email">
+                        </div>
+                    </div>
+
+                    <!-- Add this after the email field and before the campaign field -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <select id="company" name="company" required>
+                                <option value="">Select Company</option>
+                                <option value="Daniel - Sofia">Daniel - Sofia</option>
+                                <option value="ST - NYC">ST - NYC</option>
+                                <option value="ST - Toronto">ST - Toronto</option>
+                                <option value="ST - West">ST - West</option>
+                                <option value="Trader Interactive">Trader Interactive</option>
+                                <option value="In Powered">In Powered</option>
+                                <option value="Ad Ventis">Ad Ventis</option>
+                                <option value="Bloom Media">Bloom Media</option>
+                                <option value="TUX">TUX</option>
+                                <option value="LeDevoir">LeDevoir</option>
+                                <option value="Spark">Spark</option>
+                                <option value="Fuel">Fuel</option>
+                                <option value="Village Media">Village Media</option>
+                                <option value="Null">Null</option>
+                                <option value="Kijiji">Kijiji</option>
+                                <option value="Brain Labs">Brain Labs</option>
+                                <option value="Chameleon">Chameleon</option>
+                                <option value="Cossette">Cossette</option>
+                                <option value="Datafy">Datafy</option>
+                                <option value="PDi">PDi</option>
+                                <option value="Magnite">Magnite</option>
+                                <option value="Horizon">Horizon</option>
+                                <option value="Omnicom">Omnicom</option>
+                                <option value="Media Experts">Media Experts</option>
+                                <option value="Equativ">Equativ</option>
+                                <option value="Group M">Group M</option>
+                                <option value="Contempo">Contempo</option>
+                                <option value="Dentsu">Dentsu</option>
+                                <option value="Epitaph">Epitaph</option>
+                                <option value="Stratège média">Stratège média</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="vertical">Vertical</label>
+                            <select id="vertical" name="vertical" required>
+                                <option value="">Select Vertical</option>
+                                <option value="Fashion & Apparel">Fashion & Apparel</option>
+                                <option value="Automotive">Automotive</option>
+                                <option value="Motored Vehicles">Motored Vehicles</option>
+                                <option value="Aeronotics">Aeronotics</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Tech">Tech</option>
+                                <option value="Health & Wellness">Health & Wellness</option>
+                                <option value="Food & Beverage">Food & Beverage</option>
+                                <option value="Pharmaceuticals">Pharmaceuticals</option>
+                                <option value="Home & Living">Home & Living</option>
+                                <option value="Travel & Hospitality">Travel & Hospitality</option>
+                                <option value="Finance & Insurance">Finance & Insurance</option>
+                                <option value="Entertainment & Media">Entertainment & Media</option>
+                                <option value="Education">Education</option>
+                                <option value="Sports & Outdoor">Sports & Outdoor</option>
+                                <option value="Luxury Goods">Luxury Goods</option>
+                                <option value="Pet Products">Pet Products</option>
+                                <option value="CPG">CPG</option>
+                                <option value="Food Service & Hospitality">Food Service & Hospitality</option>
+                                <option value="Employment & Jobs">Employment & Jobs</option>
+                                <option value="Digital">Digital</option>
+                                <option value="Unsure">Unsure</option>
+                                <option value="Other Services">Other Services</option>
+                                <option value="Alcohol">Alcohol</option>
+                                <option value="Retail">Retail</option>
+                                <option value="Cosmetics">Cosmetics</option>
+                                <option value="Telecom">Telecom</option>
+                                <option value="Lottery">Lottery</option>
+                                <option value="Government">Government</option>
+                                <option value="Utilities">Utilities</option>
+                                <option value="Tabacco">Tabacco</option>
+                                <option value="Banking">Banking</option>
+                                <option value="Recreational watercraft">Recreational watercraft</option>
+                                <option value="Beauty & Cosmetics">Beauty & Cosmetics</option>
+                                <option value="Elections">Elections</option>
+                                <option value="Event">Event</option>
+                            </select>
                         </div>
                     </div>
 
@@ -408,7 +497,7 @@
                             <label for="campaign">Campaign</label>
                             <input type="text" id="campaign" name="campaign" required placeholder="Enter campaign name">
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="mainUrl">Main URL</label>
                             <input type="url" id="mainUrl" name="mainUrl" required placeholder="Enter your URL">
@@ -417,7 +506,8 @@
 
                     <div class="form-group">
                         <label for="briefInfo">Brief Information</label>
-                        <textarea id="briefInfo" name="briefInfo" required placeholder="Provide some information"></textarea>
+                        <textarea id="briefInfo" name="briefInfo" required
+                            placeholder="Provide some information"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -538,8 +628,8 @@
                         </div>
                         <div class="form-group">
                             <label for="estimatedVolume">Estimated Volume of Impressions</label>
-                            <input type="text" id="estimatedVolume" name="estimatedVolume" 
-                                required placeholder="Enter volume">
+                            <input type="text" id="estimatedVolume" name="estimatedVolume" required
+                                placeholder="Enter volume">
                         </div>
                     </div>
 
@@ -564,10 +654,10 @@
                 this.options = element.querySelectorAll('.multi-select-option');
                 this.name = element.getAttribute('data-name');
                 this.selectedValues = new Set();
-                
+
                 this.init();
             }
-            
+
             init() {
                 // Toggle dropdown
                 this.container.addEventListener('click', (e) => {
@@ -577,22 +667,22 @@
                     e.stopPropagation();
                     this.toggleDropdown();
                 });
-                
+
                 // Handle option selection
                 this.options.forEach(option => {
                     const checkbox = option.querySelector('input[type="checkbox"]');
-                    
+
                     option.addEventListener('click', (e) => {
                         e.stopPropagation(); // Prevent dropdown from closing
-                        
+
                         if (e.target.type !== 'checkbox') {
                             e.preventDefault();
                             checkbox.checked = !checkbox.checked;
                         }
-                        
+
                         const value = checkbox.value;
                         const label = option.querySelector('label').textContent;
-                        
+
                         if (checkbox.checked) {
                             this.addSelection(value, label);
                             option.classList.add('selected');
@@ -603,7 +693,7 @@
                     });
                 });
             }
-            
+
             toggleDropdown() {
                 // Close other dropdowns
                 document.querySelectorAll('.multi-select-dropdown').forEach(dd => {
@@ -612,65 +702,65 @@
                         dd.parentElement.querySelector('.multi-select-container').classList.remove('active');
                     }
                 });
-                
+
                 this.dropdown.classList.toggle('show');
                 this.container.classList.toggle('active');
             }
-            
+
             addSelection(value, label) {
                 this.selectedValues.add(value);
                 this.updateDisplay();
             }
-            
+
             removeSelection(value) {
                 this.selectedValues.delete(value);
-                
+
                 // Uncheck the checkbox
-                const option = Array.from(this.options).find(opt => 
+                const option = Array.from(this.options).find(opt =>
                     opt.querySelector('input[type="checkbox"]').value === value
                 );
                 if (option) {
                     option.querySelector('input[type="checkbox"]').checked = false;
                     option.classList.remove('selected');
                 }
-                
+
                 this.updateDisplay();
             }
-            
+
             updateDisplay() {
                 this.selectedItemsContainer.innerHTML = '';
-                
+
                 if (this.selectedValues.size === 0) {
                     this.selectedItemsContainer.innerHTML = `<span class="placeholder-text">Select ${this.name}</span>`;
                 } else {
                     this.selectedValues.forEach(value => {
-                        const option = Array.from(this.options).find(opt => 
+                        const option = Array.from(this.options).find(opt =>
                             opt.querySelector('input[type="checkbox"]').value === value
                         );
                         const label = option.querySelector('label').textContent;
-                        
+
                         const item = document.createElement('div');
                         item.className = 'selected-item';
                         item.innerHTML = `
                             ${label}
                             <span class="remove-btn" data-value="${value}">×</span>
                         `;
-                        
+
                         const removeBtn = item.querySelector('.remove-btn');
                         removeBtn.addEventListener('click', (e) => {
                             e.stopPropagation();
                             this.removeSelection(value);
                         });
-                        
+
                         this.selectedItemsContainer.appendChild(item);
                     });
                 }
             }
-            
+
             getSelectedValues() {
                 return Array.from(this.selectedValues);
             }
-            
+
             reset() {
                 this.selectedValues.clear();
                 this.options.forEach(option => {
@@ -680,14 +770,14 @@
                 this.updateDisplay();
             }
         }
-        
+
         // Initialize all multi-selects
         const multiSelects = {};
         document.querySelectorAll('.multi-select').forEach(element => {
             const name = element.getAttribute('data-name');
             multiSelects[name] = new MultiSelect(element);
         });
-        
+
         // Close dropdowns when clicking outside
         document.addEventListener('click', () => {
             document.querySelectorAll('.multi-select-dropdown').forEach(dropdown => {
@@ -697,24 +787,24 @@
         });
 
         // Form submission
-        document.getElementById('sofiaForm').addEventListener('submit', async function(e) {
+        document.getElementById('sofiaForm').addEventListener('submit', async function (e) {
             e.preventDefault();
-            
+
             const submitBtn = document.querySelector('.submit-btn');
             const successMessage = document.getElementById('successMessage');
             const errorMessage = document.getElementById('errorMessage');
-            
+
             // Hide previous messages
             successMessage.style.display = 'none';
             errorMessage.style.display = 'none';
-            
+
             // Show loading state
             submitBtn.textContent = 'Submitting...';
             submitBtn.disabled = true;
-            
+
             // Collect form data
             const formData = new FormData(this);
-            
+
             // Create data object
             const data = {
                 name: formData.get('name'),
@@ -726,9 +816,11 @@
                 sizes: multiSelects['sizes'].getSelectedValues(),
                 types: multiSelects['types'].getSelectedValues(),
                 campaignPeriod: formData.get('campaignPeriod'),
-                estimatedVolume: formData.get('estimatedVolume')
+                estimatedVolume: formData.get('estimatedVolume'),
+                company: formData.get('company'),
+                vertical: formData.get('vertical')
             };
-            
+
             try {
                 const response = await fetch('https://jokra.app.n8n.cloud/webhook/e5e222f8-d20f-458d-8d30-d3540199b22e', {
                     method: 'POST',
@@ -737,20 +829,20 @@
                     },
                     body: JSON.stringify(data)
                 });
-                
+
                 if (response.ok) {
                     successMessage.style.display = 'block';
                     this.reset();
-                    
+
                     // Reset all multi-selects
                     Object.values(multiSelects).forEach(ms => ms.reset());
-                    
+
                     // Scroll to success message
                     successMessage.scrollIntoView({ behavior: 'smooth' });
                 } else {
                     throw new Error('Network response was not ok');
                 }
-                
+
             } catch (error) {
                 console.error('Error:', error);
                 errorMessage.style.display = 'block';
@@ -763,4 +855,5 @@
         });
     </script>
 </body>
+
 </html>
