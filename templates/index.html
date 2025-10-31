@@ -128,6 +128,7 @@
             border: 1px solid #E2E8F0;
             border-radius: 8px;
             font-size: 16px;
+            color: gray;
             font-family: inherit;
             background: white;
             transition: all 0.3s ease;
@@ -408,16 +409,24 @@
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" required placeholder="Enter your email">
                         </div>
+                        
                     </div>
 
                     <!-- Add this after the email field and before the campaign field -->
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="company">Company</label>
-                            <input type="text" id="company" name="company" required placeholder="Enter Company name">
+                            <label for="clientname">Client Name</label>
+                            <input type="text" id="clientname" name="clientname" required placeholder="Enter Client name">
                             
                         </div>
                         <div class="form-group">
+                            <label for="brandname">Brand Name</label>
+                            <input type="text" id="brandname" name="brandname" required placeholder="Enter Brand name">
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="form-group">
                             <label for="vertical">Vertical</label>
                             <select id="vertical" name="vertical" required>
                                 <option value="">Select Vertical</option>
@@ -459,7 +468,6 @@
                                 <option value="Event">Event</option>
                             </select>
                         </div>
-                    </div>
 
                     <div class="form-row">
                         <div class="form-group">
@@ -597,7 +605,7 @@
                         </div>
                         <div class="form-group">
                             <label for="estimatedVolume">Estimated Volume of Impressions</label>
-                            <input type="text" id="estimatedVolume" name="estimatedVolume" required
+                            <input type="text" id="estimatedVolume" name="estimatedVolume" 
                                 placeholder="Enter volume">
                         </div>
                     </div>
@@ -786,7 +794,8 @@
                 types: multiSelects['types'].getSelectedValues(),
                 campaignPeriod: formData.get('campaignPeriod'),
                 estimatedVolume: formData.get('estimatedVolume'),
-                company: formData.get('company'),
+                clientname: formData.get('clientname'),
+                brandname: formData.get('brandname'),
                 vertical: formData.get('vertical')
             };
 
